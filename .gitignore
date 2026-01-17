@@ -2,3 +2,5 @@
 **/lib/**
 **/coverage/**
 **/.vscode/**
+
+.env
