@@ -10,10 +10,11 @@ export const getPackageName = async (): Promise<string> => {
 };
 
 export const getPackageVersion = async (): Promise<string | undefined> => {
-  return input({
+  const version = await input({
     message: "Package version: ",
     default: "latest",
-  }).then((version) => (version === "latest" ? undefined : version));
+  });
+  return version === "latest" ? undefined : version;
 };
 
 export const getNumberOfDownloads = async (): Promise<number> => {

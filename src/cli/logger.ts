@@ -4,7 +4,11 @@ import ora, { Ora } from "ora";
 import { getConfig } from "../config";
 import { Stats } from "../models/stats.model";
 
-export const terminalSpinner: Ora = ora();
+// Disable the spinner during tests to avoid keeping a TTY handle open
+export const terminalSpinner: Ora = ora({
+  isEnabled: process.env.NODE_ENV !== "test",
+  discardStdin: true,
+});
 
 export const mapToString = (num: number): string => {
   if (Number.isInteger(num)) {
