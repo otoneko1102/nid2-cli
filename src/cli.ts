@@ -16,6 +16,7 @@ const argv = yargs(hideBin(process.argv))
       "Examples:\n\n" +
       "  $ nid\n" +
       "  $ nid -p my-package -n 1000 -m 300 -t 3000\n" +
+      "  $ nid -p my-package -v 1.0.0 -n 1000 -m 300 -t 3000\n" +
       "  $ nid --package-name my-package --num-downloads 1000 --max-concurrent-downloads 300 --download-timeout 3000\n\n" +
       "All options are documented under: nid help",
   )
@@ -23,6 +24,11 @@ const argv = yargs(hideBin(process.argv))
     alias: "p",
     type: "string",
     description: "NPM package to increase the downloads of",
+  })
+  .option("package-version", {
+    alias: "v",
+    type: "string",
+    description: "Version to increase the downloads of"
   })
   .option("num-downloads", {
     alias: "n",
@@ -46,13 +52,14 @@ const argv = yargs(hideBin(process.argv))
 const runWithArgs = (
   args: Arguments<{
     "package-name"?: string;
+    "package-version"?: string;
     "num-downloads"?: number;
     "max-concurrent-downloads"?: number;
     "download-timeout"?: number;
   }>,
 ) => {
   // Check if any relevant argument was provided
-  const hasAnyArg = ["package-name", "num-downloads", "max-concurrent-downloads", "download-timeout"].some(
+  const hasAnyArg = ["package-name", "package-version", "num-downloads", "max-concurrent-downloads", "download-timeout"].some(
     (arg) => args[arg] !== undefined
   );
 
@@ -64,6 +71,7 @@ const runWithArgs = (
 
   const config: Partial<Config> = {
     packageName: args["package-name"],
+    packageVersion: args["package-version"],
     numDownloads: args["num-downloads"],
     maxConcurrentDownloads: args["max-concurrent-downloads"],
     downloadTimeout: args["download-timeout"],
@@ -85,6 +93,7 @@ const runWithArgs = (
 runWithArgs(
   argv as Arguments<{
     "package-name"?: string;
+    "package-version"?: string;
     "num-downloads"?: number;
     "max-concurrent-downloads"?: number;
     "download-timeout"?: number;

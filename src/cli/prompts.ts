@@ -9,6 +9,13 @@ export const getPackageName = async (): Promise<string> => {
   });
 };
 
+export const getPackageVersion = async (): Promise<string | undefined> => {
+  return input({
+    message: "Package version: ",
+    default: "latest",
+  }).then((version) => (version === "latest" ? undefined : version));
+};
+
 export const getNumberOfDownloads = async (): Promise<number> => {
   const result = await number({
     message: "Number of downloads: ",
@@ -49,6 +56,7 @@ export const getConfigFromCli = async (): Promise<Config> => {
   const config: Config = getEmptyConfig();
 
   config.packageName = await getPackageName();
+  config.packageVersion = await getPackageVersion();
   config.numDownloads = await getNumberOfDownloads();
   config.maxConcurrentDownloads = await getMaxConcurrentDownloads();
   config.downloadTimeout = await getDownloadTimeout();

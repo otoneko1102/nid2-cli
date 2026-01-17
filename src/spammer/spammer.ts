@@ -54,6 +54,21 @@ export const getVersionPackage = async (): Promise<string> => {
   }
 }
 
+export const verifyVersionExists = async (version: string): Promise<boolean> => {
+  const encodedPackageName: string = getEncodedPackageName(getConfig().packageName);
+  
+  try {
+    await request<NpmjsResponse>({
+      baseUrl: "https://registry.npmjs.org",
+      url: `/${encodedPackageName}/${version}`,
+      method: "GET",
+    });
+    return true;
+  } catch {
+    return false;
+  }
+};
+
 export const downloadPackage = async (version: string, stats: Stats): Promise<unknown> => {
   const packageName: string = getConfig().packageName;
   const unscopedPackageName: string = stripOrganisationFromPackageName(packageName);
@@ -99,7 +114,21 @@ const spamDownloads = async (version: string, stats: Stats): Promise<void> => {
  */
 export const run = async (): Promise<void> => {
   try {
-    const version: string = await getVersionPackage();
+    let version: string;
+    const pkgVersion = getConfig().packageVersion;
+    if (pkgVersion) {
+      terminalSpinner.start();
+      terminalSpinner.text = `Verifying version ${pkgVersion}...`;
+      const versionExists = await verifyVersionExists(pkgVersion);
+      if (!versionExists) {
+        terminalSpinner.fail(`Version ${pkgVersion} not found`);
+        throw new Error(`Package version ${pkgVersion} does not exist on npm registry`);
+      }
+      version = pkgVersion;
+      terminalSpinner.succeed(`Package version specified: ${version}`);
+    } else {
+      version = await getVersionPackage();
+    }
     const startTime: number = Date.now();
     const stats: Stats = new Stats(startTime);
 

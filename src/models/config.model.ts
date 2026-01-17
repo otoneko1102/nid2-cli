@@ -3,6 +3,8 @@ export interface Config {
 
   packageName: string;
 
+  packageVersion?: string;
+
   maxConcurrentDownloads: number;
 
   downloadTimeout: number;
