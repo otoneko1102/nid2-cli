@@ -13,7 +13,6 @@
     "yargs": "^17.7.2"
   },
   "devDependencies": {
-    "@release-it/conventional-changelog": "^8.0.2",
     "@types/jest": "^29.5.0",
     "@types/node": "^18.15.0",
     "@types/yargs": "^17.0.33",
@@ -25,7 +24,6 @@
     "nock": "13.2.4",
     "nodemon": "^3.1.4",
     "prettier": "^3.0.0",
-    "release-it": "^17.6.0",
     "ts-jest": "^29.4.6",
     "ts-node": "^10.9.2",
     "typescript": "^4.9.5"
@@ -36,8 +34,7 @@
     "test": "jest --coverage --detectOpenHandles",
     "format": "prettier . --write & eslint . --fix",
     "dev": "nodemon --watch 'src/**/*.ts' --exec ts-node src/index.ts",
-    "dev:cli": "nodemon --watch 'src/**/*.ts' --exec ts-node src/cli.ts",
-    "release": "release-it"
+    "dev:cli": "nodemon --watch 'src/**/*.ts' --exec ts-node src/cli.ts"
   },
   "jest": {
     "preset": "ts-jest",
@@ -49,27 +46,6 @@
       "text",
       "lcov"
     ]
-  },
-  "release-it": {
-    "git": {
-      "commitMessage": "chore: release ${version}",
-      "tagName": "v${version}",
-      "commitMode": "direct",
-      "push": true,
-      "branch": "release-candidate"
-    },
-    "npm": {
-      "publish": true
-    },
-    "github": {
-      "release": true
-    },
-    "plugins": {
-      "@release-it/conventional-changelog": {
-        "preset": "conventionalcommits",
-        "infile": "CHANGELOG.md"
-      }
-    }
   },
   "bin": {
     "nid2": "lib/src/cli.js"
