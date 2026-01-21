@@ -56,13 +56,13 @@ nid2 [options]
 
 ### 📋 Available Options
 
-| Option                       | Short | Type     | Description                                           |
-| ---------------------------- | ----- | -------- | ----------------------------------------------------- |
-| `--package-name`             | `-p`  | `string` | NPM package name to simulate downloads for            |
-| `--package-version`          | `-v`  | `string` | Package version (defaults to latest if not specified) |
-| `--num-downloads`            | `-n`  | `number` | Total number of downloads to simulate                 |
-| `--max-concurrent-downloads` | `-m`  | `number` | Maximum concurrent downloads at once                  |
-| `--download-timeout`         | `-t`  | `number` | Download timeout in milliseconds                      |
+| Option | Short | Type | Required | Description |
+| :-- | --- | --- | --- | :-- |
+| `--package-name` | `-p` | `string` | `true` | NPM package name to simulate downloads for |
+| `--package-version` | `-v` | `string` | `false` | Package version (defaults to latest if not specified) |
+| `--num-downloads` | `-n` | `number` | `false` | Total number of downloads to simulate |
+| `--max-concurrent-downloads` | `-m` | `number` | `false` | Maximum concurrent downloads at once |
+| `--download-timeout` | `-t` | `number` | `false` | Download timeout in milliseconds |
 
 ### 📝 Usage Examples
 
@@ -114,14 +114,14 @@ npm install
 
 ### 🧪 Available Scripts
 
-| Script            | Description                                    |
-| ----------------- | ---------------------------------------------- |
-| `npm run dev`     | Run in development mode with file watching     |
+| Script | Description |
+| :-- | --- |
+| `npm run dev` | Run in development mode with file watching |
 | `npm run dev:cli` | Run CLI in development mode with file watching |
-| `npm run build`   | Compile TypeScript to JavaScript               |
-| `npm start`       | Run compiled JavaScript                        |
-| `npm test`        | Run test suite with coverage                   |
-| `npm run format`  | Format code and fix linting issues             |
+| `npm run build` | Compile TypeScript to JavaScript |
+| `npm start` | Run compiled JavaScript |
+| `npm test` | Run test suite with coverage |
+| `npm run format` | Format code and fix linting issues |
 
 ## ⚙️ Configuration
 
@@ -143,13 +143,13 @@ export default config;
 
 ### Configuration Options
 
-| Property                 | Type                | Description                           | Example     |
-| ------------------------ | ------------------- | ------------------------------------- | ----------- |
-| `packageName`            | `string`            | NPM package to simulate downloads for | `"lodash"`  |
-| `packageVersion`         | `string` (optional) | Specific package version              | `"4.17.21"` |
-| `numDownloads`           | `number`            | Total downloads to simulate           | `1000`      |
-| `maxConcurrentDownloads` | `number`            | Parallel downloads at once            | `300`       |
-| `downloadTimeout`        | `number`            | Timeout per download (ms)             | `3000`      |
+| Property | Type | Description | Example |
+| :-- | --- | :-- | --- |
+| `packageName` | `string` | NPM package to simulate downloads for | `"lodash"` |
+| `packageVersion` | `string` (optional) | Specific package version | `"4.17.21"` |
+| `numDownloads` | `number` | Total downloads to simulate | `1000` |
+| `maxConcurrentDownloads` | `number` | Parallel downloads at once | `300` |
+| `downloadTimeout` | `number` | Timeout per download (ms) | `3000` |
 
 ### ⚡ Performance Tuning
 
