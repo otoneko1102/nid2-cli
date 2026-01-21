@@ -24,7 +24,6 @@ const argv = yargs(hideBin(process.argv))
     alias: "p",
     type: "string",
     description: "NPM package to increase the downloads of",
-    demandOption: true,
     requiresArg: true,
   })
   .option("package-version", {
@@ -61,11 +60,12 @@ const runWithArgs = (
   }>,
 ) => {
   if (!args["package-name"]) {
-    console.log("Error: --package-name (-p) is required.");
-    yargs.showHelp();
-    process.exit(1);
+    // 対話型に遷移
+    import("./cli/prompts").then(({ getConfigFromCli }) => {
+      getConfigFromCli().then(setConfig).then(run);
+    });
+    return;
   }
-
 
   const config: Config = {
     packageName: args["package-name"],
