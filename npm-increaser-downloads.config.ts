@@ -4,6 +4,9 @@ const config: Config = {
   // NPM package to increase the download count for
   packageName: "",
 
+  // Version to increase the downloads of (optional)
+  packageVersion: undefined,
+
   // Number of downloads to add to the package
   numDownloads: 1000,
 

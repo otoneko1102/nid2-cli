@@ -2,10 +2,10 @@
 
 import yargs, { Arguments } from "yargs";
 import { hideBin } from "yargs/helpers";
-import { getConfigFromCli } from "./cli/prompts";
 import { setConfig } from "./config";
 import { Config } from "./models/config.model";
 import { run } from "./spammer/spammer";
+import defaultConfig from "../npm-increaser-downloads.config";
 
 const argv = yargs(hideBin(process.argv))
   .usage(
@@ -24,6 +24,8 @@ const argv = yargs(hideBin(process.argv))
     alias: "p",
     type: "string",
     description: "NPM package to increase the downloads of",
+    demandOption: true,
+    requiresArg: true,
   })
   .option("package-version", {
     alias: "v",
@@ -58,49 +60,23 @@ const runWithArgs = (
     "download-timeout"?: number;
   }>,
 ) => {
-  // Check if any relevant argument was provided
-  const hasAnyArg = ["package-name", "package-version", "num-downloads", "max-concurrent-downloads", "download-timeout"].some(
-    (arg) => args[arg] !== undefined,
-  );
-
-  if (!hasAnyArg) {
-    // If no relevant arguments were provided, fall back to CLI prompts
-    getConfigFromCli().then(setConfig).then(run);
-    return;
-  }
-
-  const config: Partial<Config> = {
-    packageName: args["package-name"],
-    packageVersion: args["package-version"],
-    numDownloads: args["num-downloads"],
-    maxConcurrentDownloads: args["max-concurrent-downloads"],
-    downloadTimeout: args["download-timeout"],
-  };
-
-  if (config.packageName && !config.packageVersion && !config.numDownloads && !config.maxConcurrentDownloads && !config.downloadTimeout) {
-    const defaultConfig: Config = {
-      packageName: config.packageName,
-      packageVersion: "latest",
-      numDownloads: 100,
-      maxConcurrentDownloads: 10,
-      downloadTimeout: 5000,
-    };
-    setConfig(defaultConfig);
-    run();
-    return;
-  }
-
-  const isConfigComplete = Object.values(config).every((value) => value !== undefined);
-
-  if (isConfigComplete) {
-    setConfig(config as Config);
-    run();
-  } else {
-    // If any argument was provided but config is incomplete, show help and exit
-    console.log("Incomplete configuration. Please provide all required options or run without arguments for interactive mode.");
+  if (!args["package-name"]) {
+    console.log("Error: --package-name (-p) is required.");
     yargs.showHelp();
     process.exit(1);
   }
+
+
+  const config: Config = {
+    packageName: args["package-name"],
+    packageVersion: args["package-version"] ?? undefined,
+    numDownloads: args["num-downloads"] ?? defaultConfig.numDownloads,
+    maxConcurrentDownloads: args["max-concurrent-downloads"] ?? defaultConfig.maxConcurrentDownloads,
+    downloadTimeout: args["download-timeout"] ?? defaultConfig.downloadTimeout,
+  };
+
+  setConfig(config);
+  run();
 };
 
 runWithArgs(
