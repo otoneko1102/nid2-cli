@@ -1,9 +1,9 @@
-import { input, number } from '@inquirer/prompts';
+import { input, number } from "@inquirer/prompts";
 import { getPackageName, getNumberOfDownloads, getMaxConcurrentDownloads, getDownloadTimeout, getConfigFromCli } from "./prompts";
 import { Config } from "../models/config.model";
 
 // Mock the @inquirer/prompts module
-jest.mock('@inquirer/prompts', () => ({
+jest.mock("@inquirer/prompts", () => ({
   input: jest.fn(),
   number: jest.fn(),
 }));
@@ -48,9 +48,7 @@ describe("cli prompts", () => {
   describe("getConfigFromCli", () => {
     it("should return a complete config object when all prompts are answered", async () => {
       (input as jest.Mock).mockResolvedValueOnce("test-package");
-      (number as jest.Mock).mockResolvedValueOnce(1000)
-        .mockResolvedValueOnce(300)
-        .mockResolvedValueOnce(3000);
+      (number as jest.Mock).mockResolvedValueOnce(1000).mockResolvedValueOnce(300).mockResolvedValueOnce(3000);
 
       const expectedConfig: Config = {
         packageName: "test-package",

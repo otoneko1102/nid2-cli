@@ -1,4 +1,4 @@
-import { Config } from './src/models/config.model';
+import { Config } from "./src/models/config.model";
 
 const config: Config = {
   // NPM package to increase the download count for

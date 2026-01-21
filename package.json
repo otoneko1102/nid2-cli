@@ -1,6 +1,6 @@
 {
   "name": "nid2-cli",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Raises the popularity score on your package through nefarious means.",
   "author": "otoneko.",
   "license": "MIT",

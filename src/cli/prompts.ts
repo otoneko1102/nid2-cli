@@ -1,4 +1,4 @@
-import { input, number } from '@inquirer/prompts';
+import { input, number } from "@inquirer/prompts";
 import { Config } from "../models/config.model";
 import { validateNumbers, validatePackageName } from "./validators";
 

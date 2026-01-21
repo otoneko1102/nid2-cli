@@ -28,7 +28,7 @@ const argv = yargs(hideBin(process.argv))
   .option("package-version", {
     alias: "v",
     type: "string",
-    description: "Version to increase the downloads of"
+    description: "Version to increase the downloads of",
   })
   .option("num-downloads", {
     alias: "n",
@@ -60,7 +60,7 @@ const runWithArgs = (
 ) => {
   // Check if any relevant argument was provided
   const hasAnyArg = ["package-name", "package-version", "num-downloads", "max-concurrent-downloads", "download-timeout"].some(
-    (arg) => args[arg] !== undefined
+    (arg) => args[arg] !== undefined,
   );
 
   if (!hasAnyArg) {
@@ -76,6 +76,19 @@ const runWithArgs = (
     maxConcurrentDownloads: args["max-concurrent-downloads"],
     downloadTimeout: args["download-timeout"],
   };
+
+  if (config.packageName && !config.packageVersion && !config.numDownloads && !config.maxConcurrentDownloads && !config.downloadTimeout) {
+    const defaultConfig: Config = {
+      packageName: config.packageName,
+      packageVersion: "latest",
+      numDownloads: 100,
+      maxConcurrentDownloads: 10,
+      downloadTimeout: 5000,
+    };
+    setConfig(defaultConfig);
+    run();
+    return;
+  }
 
   const isConfigComplete = Object.values(config).every((value) => value !== undefined);
 

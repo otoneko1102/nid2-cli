@@ -55,37 +55,42 @@ nid2 [options]
 
 ### 📋 Available Options
 
-| Option | Short | Type | Description |
-|--------|-------|------|-------------|
-| `--package-name` | `-p` | `string` | NPM package name to simulate downloads for |
-| `--package-version` | `-v` | `string` | Package version (defaults to latest if not specified) |
-| `--num-downloads` | `-n` | `number` | Total number of downloads to simulate |
-| `--max-concurrent-downloads` | `-m` | `number` | Maximum concurrent downloads at once |
-| `--download-timeout` | `-t` | `number` | Download timeout in milliseconds |
+| Option                       | Short | Type     | Description                                           |
+| ---------------------------- | ----- | -------- | ----------------------------------------------------- |
+| `--package-name`             | `-p`  | `string` | NPM package name to simulate downloads for            |
+| `--package-version`          | `-v`  | `string` | Package version (defaults to latest if not specified) |
+| `--num-downloads`            | `-n`  | `number` | Total number of downloads to simulate                 |
+| `--max-concurrent-downloads` | `-m`  | `number` | Maximum concurrent downloads at once                  |
+| `--download-timeout`         | `-t`  | `number` | Download timeout in milliseconds                      |
 
 ### 📝 Usage Examples
 
 **Interactive mode:**
+
 ```bash
 nid2
 ```
 
 **Simulate downloads for latest version:**
+
 ```bash
 nid2 -p lodash -n 1000 -m 300 -t 3000
 ```
 
 **Simulate downloads for specific version:**
+
 ```bash
 nid2 -p lodash -v 4.17.21 -n 1000 -m 300 -t 3000
 ```
 
 **Using long option names:**
+
 ```bash
 nid2 --package-name lodash --package-version 4.17.21 --num-downloads 1000 --max-concurrent-downloads 300 --download-timeout 3000
 ```
 
 **Get help:**
+
 ```bash
 nid2 help
 nid2 -h
@@ -108,14 +113,14 @@ npm install
 
 ### 🧪 Available Scripts
 
-| Script | Description |
-|--------|-------------|
-| `npm run dev` | Run in development mode with file watching |
+| Script            | Description                                    |
+| ----------------- | ---------------------------------------------- |
+| `npm run dev`     | Run in development mode with file watching     |
 | `npm run dev:cli` | Run CLI in development mode with file watching |
-| `npm run build` | Compile TypeScript to JavaScript |
-| `npm start` | Run compiled JavaScript |
-| `npm test` | Run test suite with coverage |
-| `npm run format` | Format code and fix linting issues |
+| `npm run build`   | Compile TypeScript to JavaScript               |
+| `npm start`       | Run compiled JavaScript                        |
+| `npm test`        | Run test suite with coverage                   |
+| `npm run format`  | Format code and fix linting issues             |
 
 ## ⚙️ Configuration
 
@@ -137,13 +142,13 @@ export default config;
 
 ### Configuration Options
 
-| Property | Type | Description | Example |
-|----------|------|-------------|---------|
-| `packageName` | `string` | NPM package to simulate downloads for | `"lodash"` |
-| `packageVersion` | `string` (optional) | Specific package version | `"4.17.21"` |
-| `numDownloads` | `number` | Total downloads to simulate | `1000` |
-| `maxConcurrentDownloads` | `number` | Parallel downloads at once | `300` |
-| `downloadTimeout` | `number` | Timeout per download (ms) | `3000` |
+| Property                 | Type                | Description                           | Example     |
+| ------------------------ | ------------------- | ------------------------------------- | ----------- |
+| `packageName`            | `string`            | NPM package to simulate downloads for | `"lodash"`  |
+| `packageVersion`         | `string` (optional) | Specific package version              | `"4.17.21"` |
+| `numDownloads`           | `number`            | Total downloads to simulate           | `1000`      |
+| `maxConcurrentDownloads` | `number`            | Parallel downloads at once            | `300`       |
+| `downloadTimeout`        | `number`            | Timeout per download (ms)             | `3000`      |
 
 ### ⚡ Performance Tuning
 

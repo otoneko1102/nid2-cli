@@ -52,11 +52,11 @@ export const getVersionPackage = async (): Promise<string> => {
       throw new Error(`Failed to get package version: ${npmioError.message}, ${npmjsError.message}`);
     }
   }
-}
+};
 
 export const verifyVersionExists = async (version: string): Promise<boolean> => {
   const encodedPackageName: string = getEncodedPackageName(getConfig().packageName);
-  
+
   try {
     await request<NpmjsResponse>({
       baseUrl: "https://registry.npmjs.org",
