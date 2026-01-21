@@ -2,7 +2,8 @@
 
 A powerful tool for simulating npm package downloads and analyzing their impact on package popularity and ranking. This tool allows developers to test how download counts affect package visibility within the npm ecosystem.
 
-> **Fork Note**: This project is forked from and inspired by [npm-increaser-downloads](https://github.com/MinhOmega/npm-increaser-downloads). We've enhanced it with additional features including package version specification and version verification capabilities.
+> [!Note]
+> This project is forked from and inspired by [npm-increaser-downloads](https://github.com/MinhOmega/npm-increaser-downloads). We've enhanced it with additional features including package version specification and version verification capabilities.
 
 ## ✨ Features
 
